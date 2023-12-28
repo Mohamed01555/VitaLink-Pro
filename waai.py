@@ -58,7 +58,13 @@ question_prompt_template = """
             Your previous answer is : {prev_answer}
 
             Based on my profile provide an answer to my query with a plan to implement it.
-           
+            Also
+                1. Identify aerobic sports suitable for me.
+                2. Provide guidance on increasing the effectiveness of the my physical activity.
+                3. Recommend types of sports activities suitable for me.
+                4. Suggest ways to incorporate physical activity into the my daily routine.
+                5. Outline the minimum amount of physical activity suitable for me.
+                6. Offer general tips for a healthy lifestyle.
                 
 
             Constraints: You must must must provide the answer my Prefered language
@@ -167,7 +173,7 @@ def main():
 
                     query = prompt.format(lang = language, cfl = selected_value, hg = selected_health_goals, psu = selected_protein_supplements, cd = selected_chronic_disease,
                                         pd = selected_disability, age = age, ft = free_time, g = gender, ps = is_pregnant,
-                                        q = st.session_state.question, prev_answer = st.session_state.responses[-2]['content']if len(st.session_state.responses) >= 2 else '')
+                                        q = st.session_state.question, prev_answer = st.session_state.responses[-1]['content']if len(st.session_state.responses) >= 2 else '')
                     print(query)
                     # response = g4f.ChatCompletion.create(
                     #     model=g4f.models.gpt_35_turbo_0613,
