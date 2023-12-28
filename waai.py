@@ -58,15 +58,7 @@ question_prompt_template = """
             Your previous answer is : {prev_answer}
 
             Based on my profile provide an answer to my query with a plan to implement it.
-            1- First help me accomplishing my Health Goal.
-            2- Second guide with a detailed diet with examples of food, vegitables and fruit  with appointments.
-            3- Third
-                1. Identify aerobic sports suitable for me.
-                2. Provide guidance on increasing the effectiveness of the my physical activity.
-                3. Recommend types of sports activities suitable for me.
-                4. Suggest ways to incorporate physical activity into the my daily routine.
-                5. Outline the minimum amount of physical activity suitable for me.
-                6. Offer general tips for a healthy lifestyle.
+           
                 
 
             Constraints: You must must must provide the answer my Prefered language
