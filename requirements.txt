@@ -1,4 +1,5 @@
 platformdirs
+browser_cookie3
 langchain==0.0.352
 streamlit==1.25.0
 streamlit_option_menu==0.3.6
