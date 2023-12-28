@@ -184,7 +184,7 @@ def main():
 
                     # ai_response = run(get_answer_from_chatgpt(query))     
 
-                    response = g4f.ChatCompletion.create(model=g4f.models.gpt_4_32k_0613, messages=[{"role": "user", "content": query}], stream=True)  # Alternative model setting
+                    response = g4f.ChatCompletion.create(model=g4f.models.gpt_35_turbo_16k_0613, messages=[{"role": "user", "content": query}], stream=True)  # Alternative model setting
                   
                     # if model == 'Model 1':
                     #     response = run(get_answer_from_youbot(query))
