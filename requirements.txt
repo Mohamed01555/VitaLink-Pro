@@ -9,7 +9,6 @@ fastapi==0.108.0
 Flask==2.2.3
 loguru==0.5.3
 nest_asyncio==1.5.6
-numpy==1.21.5
 Pillow==10.1.0
 platformdirs==4.1.0
 py_arkose_generator==0.0.0.2
