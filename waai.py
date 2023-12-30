@@ -44,6 +44,7 @@ question_prompt_template = """
             - Prefered language of answer: {lang}
             - Current Fitness Level: {cfl} (0 is the lowest, 10 is the heighest)
             - Health Goals: {hg}
+            - vergitables and fruits available to me to suggest healthy meals suitable to my goal are {vf}
             - Protein Supplement Use: {psu}
             - Chronic Diseases/Health Conditions: {cd}
             - Physical Disabilities/Limitations: {pd}
@@ -58,7 +59,9 @@ question_prompt_template = """
             Your previous answer is : {prev_answer}
 
             Based on my profile provide an answer to my query with a plan to implement it.
-            Also
+            1- First help me accomplishing my Health Goal.
+            2- Second guide with a detailed diet with examples of food, vegitables and fruit  with appointments.
+            3- Third
                 1. Identify aerobic sports suitable for me.
                 2. Provide guidance on increasing the effectiveness of the my physical activity.
                 3. Recommend types of sports activities suitable for me.
@@ -76,7 +79,7 @@ question_prompt_template = """
             Your answer in bullet points:
         """
 
-prompt = PromptTemplate(input_variables=['lang', "cfl","hg", "psu", "cd", "pd", "age", "ft", "g", "ps", 'q', 'prev_answer'], template=question_prompt_template)
+prompt = PromptTemplate(input_variables=['lang', "cfl","hg", 'vf', "psu", "cd", "pd", "age", "ft", "g", "ps", 'q', 'prev_answer'], template=question_prompt_template)
 
 # async def get_answer_from_chatgpt(question):
 #     try:
@@ -126,7 +129,7 @@ def main():
         
         language = st.radio('What is your prefered language?', ['العربية','English'])
         
-        # model = st.radio('Please choose form our models', ['Model 1','Model 2', 'Model 3'])
+
 
         selected_value = st.slider("Please, rate your current fitness level", min_value=0, max_value=10, value=5, step=1)
         
@@ -135,7 +138,10 @@ def main():
 
         # Display a multiselect for users to choose multiple health goals
         selected_health_goals = st.multiselect("What are your primary health and fitness goals?", health_goal_options)
-    
+        
+        # Define a list of available vergitables and fruits
+        veg_fru = st.text_input('Please, mention vergitables, fruits available to you to suggest a meal suitable to your goal.')
+
         selected_protein_supplements = st.radio('Are you taking Protein supplements?', ['No','Yes'])
         
         selected_chronic_disease = st.radio('Do you suffer from chronic diseases?',  ['No','Yes'])
@@ -171,9 +177,9 @@ def main():
                 with st.chat_message('assistant'):
                     st.session_state.message_placeholder = st.empty()
 
-                    query = prompt.format(lang = language, cfl = selected_value, hg = selected_health_goals, psu = selected_protein_supplements, cd = selected_chronic_disease,
+                    query = prompt.format(lang = language, cfl = selected_value, hg = selected_health_goals, vf = veg_fru, psu = selected_protein_supplements, cd = selected_chronic_disease,
                                         pd = selected_disability, age = age, ft = free_time, g = gender, ps = is_pregnant,
-                                        q = st.session_state.question, prev_answer = st.session_state.responses[-1]['content']if len(st.session_state.responses) >= 2 else '')
+                                        q = st.session_state.question, prev_answer = st.session_state.responses[-2]['content']if len(st.session_state.responses) >= 2 else '')
                     print(query)
                     # response = g4f.ChatCompletion.create(
                     #     model=g4f.models.gpt_35_turbo_0613,
