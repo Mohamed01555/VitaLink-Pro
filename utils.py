@@ -1,4 +1,3 @@
-
 import streamlit as st
 from langchain.docstore.document import Document
 from langchain.text_splitter import TokenTextSplitter
@@ -11,55 +10,37 @@ def decode_unicode(text):
 # Define your FAQ questions and answers
 def FAQs():
     faq = {
-        "What is VideoQuERI?":"It is a versatile and interactive website that utilizes AI capabilities to process videos, answer questions, generate code, solve puzzles, and perform mathematical operations.\
-        It depends that the video is described in someone's voice not visually. If the video's description is solely visual, the algorithm will not function effectively.",
-
-        "What are the Capabilities of VideoQuERI?<ul>" :
-        " <li>**Video Processing**: Users can input video URLs to your website. The AI can then process these videos to extract information, such as speech recognition for transcriptions.</li>"
-        " <li>**Question Answering**:Users can ask questions related to the video's content. The website's AI can analyze the video's transcriptions and content to provide relevant answers to users' questions.</li>"
-        " <li>**Code Generation**: If the video contains step-by-step instructions for coding, AI can extract these instructions and generate code snippets.</li>"
-        " <li>**Generating Chapters**: You can ask the bot to help you splitting your video to chapters.</li>"
-        " <li>**Puzzle Solving**: Videos with puzzle verbally instructions can be processed by the AI to understand the rules and mechanics. Users can input puzzle-specific queries, and it can provide solutions or hints.</li>"
-        " <li>**Memory**: Chatbot has memory to retain and recall information from previous parts of the conversation. But,honestly, it is not that strong.</li>"
-        " <li>**Information Retrieval** : If you forget when a piece of information was said, you can provide the video and your question.</li>"
-        " <li>**Educational Content**: Your website can serve as an educational platform by offering explanations, demonstrations, and tutorials on various subjects based on the video content.</li>"
-        " <li>**Natural Language Understanding**: The AI can understand and analyze the natural language used in both the video's transcriptions and user queries. This allows for more contextually accurate responses.</li>"
-        " <li>**Interactive UI**: Your website's user interface can incorporate elements like text input fields, and result displays to make the interactions intuitive and engaging.</li>"
-        " <li>**Scalability**: The AI-driven capabilities can be applied to various types of videos, making your website versatile and adaptable to different content.</li> </ul> "        
-          ,
+        "Q: What is VitaLink Pro?":"A: VitaLink Pro is a personalized virtual health assistant (PVHA) designed to help you achieve your health and fitness goals. It provides tailored advice, workout plans, and nutrition guidance based on your individual profile.",
+        "Q: What key capabilities does VitaLink Pro offer?<ul>" :
+        " <li>**Personalized Health Plans: **: Tailored workout routines and nutrition guidance based on your unique profile.</li>"
+        " <li>**Adaptive Algorithms: **Advanced algorithms that adjust recommendations over time to match your progress.</li>"
+        " <li>**Dietary Guidance:**: Customized nutritional advice to support your health and fitness goals.</li>"
+        " <li>**User Privacy:**: Strict adherence to privacy and data protection regulations to ensure the security of your personal information.</li>" ,
     
-        "What if the user has already generated transcription (e.g. from platforms like Coursera or Udemy)?":
-        "You can copy it and ask ChatGPT or Poe",
+        "Q: How can I benefit from using VitaLink Pro?":
+        "A: VitaLink Pro offers personalized health plans, exercise routines, and nutrition advice to help you reach your fitness goals. It adapts to your current fitness level and preferences, making it a valuable tool for anyone seeking a healthier lifestyle.",
         
-        "what if Caption generation took a long time?":"There are two propable reasons. First, the video url is not supported. Second, the transcription generation API has too many requuests\
-         If the first case, then the video may be streamed to wesite in .ts format , and .ts is not supported .However,if your case is the second case, you can visit the us after a period of time.",
+        "What makes VitaLink Pro different from other health apps?":
+        "A: VitaLink Pro stands out with its advanced language models and personalized approach. It takes into account your unique health profile, providing tailored advice and recommendations for a more effective fitness journey.",
+        "Q: How does VitaLink Pro generate personalized health plans?":"    A: VitaLink Pro uses advanced algorithms and user-provided information, such as fitness level, health goals, and preferences, to generate personalized health plans. It adapts over time, ensuring the recommendations stay relevant to your progress.",
         
-        "What if the video is in your local machine?":"You can Upload it to your google drive and then share the link with us.",
+        "Q: Can VitaLink Pro help with specific health conditions or fitness goals?" :
+        "A: Yes, VitaLink Pro is designed to assist users with a variety of health conditions and fitness goals. Whether you're looking to lose weight, build muscle, or manage specific health concerns, the app tailors its recommendations to meet your needs.",
         
-        "What are supported formats?" :
-        "However, most video formats are supported, streaming videos in the .ts format (Transport Stream) are currently not compatible with our system.\
-         Transport Stream is a container format often used for streaming live broadcasts and might require specialized processing.\
-         If you have a .ts format video, you might consider converting it to a supported format using 'ffmpeg' and upload it to your drive and share the link with us.\
-         We appreciate your understanding and are here to assist you with any questions you may have! ",
-        
-        "How can I get the video link?":
-        """You should install this <a href="https://chrome.google.com/webstore/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk?hl=es">chrome extension</a>, \
-           <a href = "https://addons.mozilla.org/en-US/firefox/addon/video-downloadhelper/">firefox extension</a>.\
-           If you are in the webpage that has the desired video click on the extension logo , a menu will be listed , click copy url, finally paste in the video url input field.
-        """ ,
+        "Q: Is my personal information safe and secure on VitaLink Pro?":
+        "A: Yes, we prioritize user privacy and data security. Your personal information is kept confidential, and we adhere to strict privacy and data protection regulations to ensure a secure user experience." ,
 
-        "What languages are supported?" : 
-        "Afrikaans, Arabic, Armenian, Azerbaijani, Belarusian, Bosnian, Bulgarian, Catalan, Chinese, Croatian, Czech, Danish, Dutch, English, Estonian, Finnish, French,\
-         Galician, German, Greek, Hebrew, Hindi, Hungarian, Icelandic, Indonesian, Italian, Japanese, Kannada, Kazakh, Korean, Latvian, Lithuanian, Macedonian, Malay, Marathi,\
-         Maori, Nepali, Norwegian, Persian, Polish, Portuguese, Romanian, Russian, Serbian, Slovak, Slovenian, Spanish, Swahili, Swedish, Tagalog, Tamil, Thai, Turkish, Ukrainian, Urdu, Vietnamese, and Welsh.",
+        "Q: Can I use VitaLink Pro if I'm a beginner in fitness?" : 
+        "A: Absolutely! VitaLink Pro is designed for users of all fitness levels, from beginners to advanced. The app adapts to your current fitness level and provides guidance suitable for your experience and goals.",
         
-        "Is there a tip to get the most out of VideoQuERI":"Yes, you should ask your question in English and ask the bot to answer in your favourite language(e.g. What is this video about? answer in 'arabic').",
+        "Q: How often should I use VitaLink Pro for optimal results?":
+        "A: For optimal results, aim to incorporate VitaLink Pro into your daily routine. Follow the personalized plans, engage in regular physical activity, and make healthy lifestyle choices. Consistency is key to seeing positive changes.",
         
-        "What is the purpose of the video URL field?":
-        "The video URL field allows you to input the URL of the video you want to query.Our system will analyze the video content to provide relevant answers.",
+        "Q: Can I use VitaLink Pro for dietary guidance?":
+        "A: Yes, VitaLink Pro includes dietary guidance as part of its personalized approach. It provides recommendations on nutrition based on your goals and preferences, helping you make informed choices for a balanced diet.",
 
-        "How do I input a video URL, especially for platforms like Facebook or embedded videos?":
-        "To input a video URL, simply copy the URL of the video you want to query and paste it into the video URL field.",
+        "Q: How does VitaLink Pro ensure user engagement and motivation?":
+        "A: VitaLink Pro fosters engagement through personalized plans, progress tracking, and regular updates. The app's adaptive nature and variety in recommendations keep users motivated on their fitness journey.",
 
         "What is the chunk size slider for?":
         "The chunk size slider lets you adjust the size of video segments that the system analyzes. This can help you get more focused and precise answers based on specific parts of the video.",
