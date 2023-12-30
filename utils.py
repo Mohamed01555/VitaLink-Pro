@@ -163,7 +163,7 @@ html_code = """
 <div style="display: flex;justify-content: center;align-items: center;">
     <h3 style='text-align: center; color: '#FFFFFF';'>Your Personalized Health Assistant</h3>
     <h2 style="text-align: center;color:'#547859'">VitaLink Pro!</h2>
-    <img style="width: 150px; margin-right: 10px; border-radius:50px "" src="data:image/jpeg;base64,{}" alt="Image Description">
+    <img style="width: 75px; margin-right: 10px; border-radius:50px "" src="data:image/jpeg;base64,{}" alt="Image Description">
 </div>
 """.format(img)
 
