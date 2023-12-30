@@ -8,31 +8,6 @@ import streamlit as st
 from pathlib import Path
 from streamlit_option_menu import option_menu
 import g4f
-# import freeGPT as fgpt
-
-# async def get_answer_from_youbot(question):
-#     try:
-#         resp = await fgpt.gpt4.Completion().create(question)
-#         return resp
-#     except:
-#         st.info('Service may be stopped or you are disconnected with internet. Feel free to open an issue here "https://github.com/Mohamed01555/VideoQuERI"')
-#         st.stop()
-
-# async def get_answer_from_GPT3(question):
-#     try:
-#         resp = await fgpt.gpt3.Completion().create(question)
-#         return resp
-#     except:
-#         st.info('Service may be stopped or you are disconnected with internet. Feel free to open an issue here "https://github.com/Mohamed01555/VideoQuERI"')
-#         st.stop()
-
-# async def get_answer_from_alpaca(question):
-#     try:
-#         resp = await fgpt.alpaca_7b.Completion().create(question)
-#         return resp
-#     except:
-#         st.info('Service may be stopped or you are disconnected with internet. Feel free to open an issue here "https://github.com/Mohamed01555/VideoQuERI"')
-#         st.stop()
 
 question_prompt_template = """
             Role: Personalized Virtual Health Assistant (PVHA)
@@ -49,7 +24,7 @@ question_prompt_template = """
             - Chronic Diseases/Health Conditions: {cd}
             - Physical Disabilities/Limitations: {pd}
             - Age: {age} years
-            - Free Time for Physical Activity: {ft}
+            - My Free Time for Physical Activity: {ft}
             - Gender: {g}
             - pregnance status if Female: {ps}
             - you may take other parameters. Take them also into consiration while generating the response.
@@ -59,17 +34,7 @@ question_prompt_template = """
             Your previous answer is : {prev_answer}
 
             Based on my profile provide an answer to my query with a plan to implement it.
-            1- First help me accomplishing my Health Goal.
-            2- Second guide with a detailed diet with examples of food, vegitables and fruit  with appointments.
-            3- Third
-                1. Identify aerobic sports suitable for me.
-                2. Provide guidance on increasing the effectiveness of the my physical activity.
-                3. Recommend types of sports activities suitable for me.
-                4. Suggest ways to incorporate physical activity into the my daily routine.
-                5. Outline the minimum amount of physical activity suitable for me.
-                6. Offer general tips for a healthy lifestyle.
-                
-
+            
             Constraints: You must must must provide the answer my Prefered language
 
             Additionally, provide your answer with links to resources that helped u answering my question.
@@ -80,14 +45,6 @@ question_prompt_template = """
         """
 
 prompt = PromptTemplate(input_variables=['lang', "cfl","hg", 'vf', "psu", "cd", "pd", "age", "ft", "g", "ps", 'q', 'prev_answer'], template=question_prompt_template)
-
-# async def get_answer_from_chatgpt(question):
-#     try:
-#         resp = await gpt3.Completion().create(question)
-#         return resp
-#     except:
-#         st.info('Service may be stopped or you are disconnected with internet. Feel free to open an issue here "https://github.com/Mohamed01555/Waai_physicalHealth"')
-#         st.stop()
 
 def img_to_bytes(img_path):
     img_bytes = Path(img_path).read_bytes()
@@ -124,50 +81,59 @@ def main():
         st.session_state.question = None
 
     with st.sidebar:
-        title = st.markdown("""**"Hello, Welcome to `Vitalink Pro!` To provide you with a personalized health and fitness experience,
-                                we'd like to gather some information. Please take a few minutes to answer the following questions:**""")
+        title = st.markdown("""**Hello, Welcome to `Vitalink Pro!`. I can help you in:
+                            <ul>
+                                <li>Guiding you to increase the effectiveness of the your physical activity.</li>
+                                <li>Recommending types of sports and activities suitable to you.</li>
+                                <li>Suggesting healthy food based on your available food and goal.</li>
+                                <li>Suggesting ways to incorporate physical activity into the your daily routine.</li>
+                                <li>Outlining the amount of physical activity suitable to you.</li>
+                                <li>Identifing Aerobic sports suitable to you.</li>
+                                <li>Offering general tips for a healthy lifestyle.</li>
+                                <li>And many more...</li>
+                            </ul>
+                                To provide you with a personalized health and fitness experience, we'd like to gather some information.
+                                Please take a few minutes to answer the following questions:**""", unsafe_allow_html=True)
         
-        language = st.radio('What is your prefered language?', ['العربية','English'])
+        language = st.radio('**What is your prefered language?**', ['العربية','English'])
         
-
-
-        selected_value = st.slider("Please, rate your current fitness level", min_value=0, max_value=10, value=5, step=1)
+        selected_value = st.slider("**Please, rate your current fitness level**", min_value=0, max_value=10, value=5, step=1)
         
         # Define a list of health goal options
         health_goal_options = ["Weight Loss", "Muscle Gain", "Overall Well-being"]
 
         # Display a multiselect for users to choose multiple health goals
-        selected_health_goals = st.multiselect("What are your primary health and fitness goals?", health_goal_options)
-        
+        selected_health_goals = st.multiselect("**What are your primary health and fitness goals?**", health_goal_options)
+
         # Define a list of available vergitables and fruits
-        veg_fru = st.text_input('Please, mention vergitables, fruits available to you to suggest a meal suitable to your goal.')
-
-        selected_protein_supplements = st.radio('Are you taking Protein supplements?', ['No','Yes'])
+        veg_fru = st.text_input('**Please, mention fodd, vergitables,and fruits available to you to suggest a meal suitable to your goal.**')
         
-        selected_chronic_disease = st.radio('Do you suffer from chronic diseases?',  ['No','Yes'])
+        selected_protein_supplements = st.radio('**Are you taking Protein supplements?**', ['No','Yes'])
+        
+        selected_chronic_disease = st.radio('**Do you suffer from chronic diseases?**',  ['No','Yes'])
         if selected_chronic_disease == 'Yes':
-            selected_chronic_disease = st.text_input('Please, mention your chronic diseases')
+            selected_chronic_disease = st.text_input('**Please, mention your chronic diseases**')
         
-        selected_disability = st.radio('Do you suffer from a disability?', ['No','Yes'])
+        selected_disability = st.radio('**Do you suffer from a disability?**', ['No','Yes'])
         if selected_disability == 'Yes':
-            selected_disability = st.text_input('Please, mention your disability.')
+            selected_disability = st.text_input('**Please, mention your disability.**')
 
-        age = st.number_input('Enter your age, please.')
+        age = st.number_input('**Enter your age, please.**')
 
-        free_time = st.text_input('When is your free time?')
+        free_time = st.text_input('**When is your free time?**')
 
-        gender = st.radio('Please, Enter your gender.', ['Male', 'Female'])
+        gender = st.radio('**Please, Enter your gender.**', ['Male', 'Female'])
         
         is_pregnant = None
         if gender == 'Female':
-            is_pregnant = st.radio('Are you pregnant?', ['I am pregnant', 'I am not pregnant'])
+            is_pregnant = st.radio('**Are you pregnant?**', ['I am pregnant', 'I am not pregnant'])
 
     if option == 'Home':
         for response in st.session_state.responses:
             with st.chat_message(response['role']):
                 st.markdown(response['content'], unsafe_allow_html=True)
         
-        st.session_state.question = st.chat_input('Ask for nutritional guidance, AI-generated workouts, seek advice and ask questions about health.', key = 'giving a question')
+        st.session_state.question = st.chat_input('Message me...', key = 'giving a question')
         if st.session_state.question:
             with st.chat_message('user'):
                 st.markdown(st.session_state.question, unsafe_allow_html=True)
@@ -179,28 +145,9 @@ def main():
 
                     query = prompt.format(lang = language, cfl = selected_value, hg = selected_health_goals, vf = veg_fru, psu = selected_protein_supplements, cd = selected_chronic_disease,
                                         pd = selected_disability, age = age, ft = free_time, g = gender, ps = is_pregnant,
-                                        q = st.session_state.question, prev_answer = st.session_state.responses[-2]['content']if len(st.session_state.responses) >= 2 else '')
-                    print(query)
-                    # response = g4f.ChatCompletion.create(
-                    #     model=g4f.models.gpt_35_turbo_0613,
-                    #     messages=[{"role": "user", "content": query}],
-                    # )
+                                        q = st.session_state.question, prev_answer = st.session_state.responses[-2]['content']if len(st.session_state.responses) >= 2 else '')   
 
-                    # ai_response = run(get_answer_from_chatgpt(query))     
-
-                    response = g4f.ChatCompletion.create(model=g4f.models.gpt_35_turbo_16k_0613, messages=[{"role": "user", "content": query}], stream=True)  # Alternative model setting
-                  
-                    # if model == 'Model 1':
-                    #     response = run(get_answer_from_youbot(query))
-                        
-                    # if model == 'Model 2':
-                    #     response = run(get_answer_from_GPT3(query))
-                    
-                    # if model == 'Model 3':
-                    #     response = run(get_answer_from_alpaca(query))
-                    # print(response)
-                    # st.session_state.message_placeholder.markdown(response, unsafe_allow_html=True)                   
-
+                    response = g4f.ChatCompletion.create(model=g4f.models.gpt_35_turbo_16k_0613, messages=[{"role": "user", "content": query}], stream=True)  # Alternative model setting          
                     res = ''
                     for r in response:
                         res += r
