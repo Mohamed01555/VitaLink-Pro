@@ -41,32 +41,6 @@ def FAQs():
 
         "How does VitaLink Pro ensure user engagement and motivation?":
         "A: VitaLink Pro fosters engagement through personalized plans, progress tracking, and regular updates. The app's adaptive nature and variety in recommendations keep users motivated on their fitness journey.",
-
-        "What is the chunk size slider for?":
-        "The chunk size slider lets you adjust the size of video segments that the system analyzes. This can help you get more focused and precise answers based on specific parts of the video.",
-
-        "How does the system generate answers from the video?":
-        "Our system uses advanced AI technology to analyze the video's audio content. It then generates answers based on the context and content of the video.",
-
-        "Is there a limit to the video length I can query?":
-        "While there's generally no strict limit on video length, very long videos might take longer to process. It's recommended to choose appropriate chunk sizes for efficient processing and accurate answers.",
-
-        "Can I change the chunk size while the video is being processed?":
-        "No, you can adjust the chunk size slider after generating the caption then click `Generate the Caption` button again . This allows you to explore different parts of the video and get answers for specific segments.",
-
-        "Can I ask questions while the caption is being generated?":
-        "No, you can ask questions after the caption generation is completed.",
-
-        "How accurate are the answers generated from the video?":
-        "The accuracy of answers depends on various factors such as the clarity of the audio, and the specificity of your questions. Generally, the system strives to provide relevant and coherent answers.",
-
-        "Can I save or bookmark specific answers from the video?":
-        "At the moment, the system doesn't offer direct saving or bookmarking of answers. However, you can take screenshots or notes to keep track of important information.",
-
-        "Are there certain types of videos that work better with this feature?":
-        "The system is designed to work with a wide range of videos, but videos with clear audio tend to yield better results. Educational, instructional, and well-structured videos are usually more suitable."
-
-
     }
     # with st.expander("FAQs"):
     for i, faq_key in enumerate(faq.keys()):
