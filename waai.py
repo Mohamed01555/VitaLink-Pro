@@ -27,13 +27,15 @@ question_prompt_template = """
             - My Free Time for Physical Activity: {ft}
             - Gender: {g}
             - pregnance status if Female: {ps}
-            - you may take other parameters. Take them also into consiration while generating the response.
+            - you may take other parameters. Take them also into considration while generating the response.
 
             My query is : {q}
 
             Your previous answer is : {prev_answer}
 
             Based on my profile provide an answer to my query with a plan to implement it.
+            
+            note that my query may be thanking for your previous response, please reply with a suitable answer.
             
             Constraints: You must must must provide the answer my Prefered language
 
